@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #pain {
+      font-size: 48px;
+      color: red;
+      font-weight: bold;
+    }
+    button {
+      margin: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div>Pain Level: <span id="pain">0</span></div>
+<button onclick="changePain(1)">Touch Wound</button>
+<button onclick="changePain(-1)">Apply Ice</button>
+
+<script>
+let pain = 0;
+const painDisplay = document.getElementById('pain');
+
+function changePain(amount) {
+  pain = Math.min(10, Math.max(0, pain + amount));
+  painDisplay.textContent = pain;
+}
+
+// Auto increase pain every 10 seconds
+setInterval(() => {
+  changePain(1);
+}, 10000);
+</script>
+
+</body>
+</html>
