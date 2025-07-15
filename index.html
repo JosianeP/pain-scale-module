@@ -7,31 +7,35 @@
       color: red;
       font-weight: bold;
     }
-    button {
-      margin: 10px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
 
-<div>Pain Level: <span id="pain">0</span></div>
-<button onclick="changePain(1)">Touch Wound</button>
-<button onclick="changePain(-1)">Apply Ice</button>
+<div>Échelle de douleur: <span id="pain">3</span></div>
 
 <script>
-let pain = 0;
+let pain = 3;
 const painDisplay = document.getElementById('pain');
 
+// Fonction centrale de modification de la douleur
 function changePain(amount) {
   pain = Math.min(10, Math.max(0, pain + amount));
   painDisplay.textContent = pain;
 }
 
-// Auto increase pain every 10 seconds
+// Fonctions globales à appeler depuis Genially
+window.increasePain = function() {
+  changePain(1);
+};
+
+window.decreasePain = function() {
+  changePain(-1);
+};
+
+// Augmentation automatique toutes les 60 secondes
 setInterval(() => {
   changePain(1);
-}, 10000);
+}, 60000);
 </script>
 
 </body>
