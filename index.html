@@ -11,26 +11,25 @@
 </head>
 <body>
 
-<div>Échelle de douleur: <span id="pain">3</span></div>
+<div>Pain Level: <span id="pain">3</span></div>
 
 <script>
 let pain = 3;
 const painDisplay = document.getElementById('pain');
 
-// Fonction centrale de modification de la douleur
 function changePain(amount) {
   pain = Math.min(10, Math.max(0, pain + amount));
   painDisplay.textContent = pain;
 }
 
-// Fonctions globales à appeler depuis Genially
-window.increasePain = function() {
-  changePain(1);
-};
-
-window.decreasePain = function() {
-  changePain(-1);
-};
+// Ecoute les messages reçus de Genially
+window.addEventListener("message", (event) => {
+  if (event.data === "increase") {
+    changePain(1);
+  } else if (event.data === "decrease") {
+    changePain(-1);
+  }
+}, false);
 
 // Augmentation automatique toutes les 60 secondes
 setInterval(() => {
